@@ -34,6 +34,7 @@ internal class ButterflyTextView : UITextView, UITextViewDelegate {
     
     var isShowing: Bool!
     
+    
     init() {
         let frame = CGRect(
             x: textViewWidthMargin,
@@ -65,7 +66,9 @@ internal class ButterflyTextView : UITextView, UITextViewDelegate {
                         width: self.frame.size.width,
                         height: self.frame.size.height)
                 }) { (Bool) -> Void in
-                    self.becomeFirstResponder()
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                        self.becomeFirstResponder()
+                    }
             }
         }
     }

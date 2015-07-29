@@ -70,7 +70,7 @@ internal class ButterflyTopBar: UIView {
             y: centerY,
             width: topBarButtonWidth,
             height: topBarButtonHeight)
-        cancelButton?.setTitle("Cancel", forState: UIControlState.Normal)
+        cancelButton?.setTitle("取消", forState: UIControlState.Normal)
         cancelButton?.titleLabel?.textAlignment = NSTextAlignment.Center
         cancelButton?.titleLabel?.textColor = UIColor.whiteColor()
         cancelButton?.layer.cornerRadius = 5
@@ -85,7 +85,7 @@ internal class ButterflyTopBar: UIView {
             y: centerY,
             width: topBarButtonWidth,
             height: topBarButtonHeight)
-        titleLabel?.text = "Feedback"
+        titleLabel?.text = "用户反馈"
         titleLabel?.textAlignment = NSTextAlignment.Center
         titleLabel?.textColor = UIColor.whiteColor()
         titleLabel?.font = UIFont.boldSystemFontOfSize(17)
@@ -97,7 +97,7 @@ internal class ButterflyTopBar: UIView {
             y: centerY,
             width: topBarButtonWidth,
             height: topBarButtonHeight)
-        sendButton?.setTitle("Send", forState: UIControlState.Normal)
+        sendButton?.setTitle("发送", forState: UIControlState.Normal)
         sendButton?.titleLabel?.textAlignment = NSTextAlignment.Center
         sendButton?.titleLabel?.textColor = UIColor.whiteColor()
         sendButton?.backgroundColor = UIColor.clearColor()

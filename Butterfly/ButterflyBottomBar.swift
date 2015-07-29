@@ -57,11 +57,11 @@ class ButterflyBottomBar: UIView {
         
         let bundlePath = NSString(format: "%@/Frameworks/Butterfly.framework/Butterfly.bundle", NSBundle.mainBundle().bundlePath)
         let colorChangeButtonImgPath = NSString(format: "%@/analytics.png", bundlePath)
-        let colorChangeButtonImg = UIImage(contentsOfFile: colorChangeButtonImgPath as String)
+        let colorChangeButtonImg = UIImage(named: "analytics.png")
         let descriptionButtonImgPath = NSString(format: "%@/email-outline.png", bundlePath)
-        let descriptionButtonImg = UIImage(contentsOfFile: descriptionButtonImgPath as String)
+        let descriptionButtonImg = UIImage(named: "email-outline.png")
         let clearButtonImgPath = NSString(format: "%@/trash.png", bundlePath)
-        let clearButtonImg = UIImage(contentsOfFile: clearButtonImgPath as String)
+        let clearButtonImg = UIImage(named: "trash.png")
         
         colorChangedButton = UIButton()
         let colorButtonRect = CGRect(

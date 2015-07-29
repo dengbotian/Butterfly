@@ -67,6 +67,8 @@ public class ButterflyViewController: UIViewController, ButterflyDrawViewDelegat
     
     var textViewIsShowing: Bool?
     
+    let placeholder = "在这里输入您的反馈......"
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -100,6 +102,8 @@ public class ButterflyViewController: UIViewController, ButterflyDrawViewDelegat
         bottomBar?.clearPathButton?.addTarget(self, action: "clearButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         
         textView.delegate = self
+        textView.text = self.placeholder
+        textView.textColor = UIColor.lightGrayColor()
         view.addSubview(self.textView)
     }
 
@@ -112,10 +116,9 @@ public class ButterflyViewController: UIViewController, ButterflyDrawViewDelegat
     /// After that, you can upload image and text manually and properly.
     public func sendButtonPressed(sender: UIButton?) {
         drawView?.enable()
-        delegate?.ButterflyViewControllerDidPressedSendButton(drawView)
         imageWillUpload = ButterflyManager.sharedManager.takeAScreenshot()
         textWillUpload = textView.text
-        
+        delegate?.ButterflyViewControllerDidPressedSendButton(drawView)
         if let textViewIsShowing = textView.isShowing {
             if textViewIsShowing == true {
                 textView.hide()
@@ -128,13 +131,18 @@ public class ButterflyViewController: UIViewController, ButterflyDrawViewDelegat
     
     func showAlertViewController() {
         self.dismissViewControllerAnimated(false, completion: nil)
-        let alert = UIAlertController(title: "Success", message: "Report Success", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+        let alert = UIAlertController(title: "反馈已发送", message: "感谢您帮助我们改进应用", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentingViewController?.presentViewController(alert, animated: true, completion: nil)
     }
     
     internal func colorChangedButtonPressed(sender: UIButton?) {
-        drawView?.lineColor = UIColor.yellowColor()
+        if drawView?.lineColor == UIColor.blueColor() {
+            drawView?.lineColor = UIColor.yellowColor()
+        } else if drawView?.lineColor == UIColor.yellowColor() {
+            drawView?.lineColor = UIColor.blueColor()
+        }
+        
     }
     
     internal func inputDescriptionButtonPressed(sender: UIButton?) {
@@ -171,19 +179,26 @@ public class ButterflyViewController: UIViewController, ButterflyDrawViewDelegat
     /// DO NOT OVERRIDE THESE METHODS BELOW EXCEPTED YOU NEED INDEED.
     ///
     public func textViewShouldBeginEditing(textView: UITextView) -> Bool {
-        if textView.tag == 0 {
-            textView.text = "";
-            textView.textColor = UIColor.blackColor();
-            textView.tag = 1;
-        }
+//        if textView.tag == 0 {
+//            textView.text = "";
+//            textView.textColor = UIColor.blackColor();
+//            textView.tag = 1;
+//        }
         return true;
     }
     
+    public func textViewDidBeginEditing(textView: UITextView) {
+        if textView.text == self.placeholder {
+            textView.text = ""
+            textView.textColor = UIColor.blackColor()
+        }
+        textView.becomeFirstResponder()
+    }
+    
     public func textViewDidEndEditing(textView: UITextView) {
-        if count(textView.text) == 0 {
-            textView.text = "Please enter your feedback."
+        if textView.text == "" {
+            textView.text = self.placeholder
             textView.textColor = UIColor.lightGrayColor()
-            textView.tag = 0
         }
         
         self.textView.hide()
@@ -191,12 +206,28 @@ public class ButterflyViewController: UIViewController, ButterflyDrawViewDelegat
         textWillUpload = textView.text
     }
     
+//    public func textViewDidEndEditing(textView: UITextView) {
+//        if count(textView.text) == 0 {
+//            textView.text = "Please enter your feedback."
+//            textView.textColor = UIColor.lightGrayColor()
+//            textView.tag = 0
+//        }
+//        
+//        self.textView.hide()
+//        drawView?.enable()
+//        textWillUpload = textView.text
+//    }
+    
     public func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             textView.resignFirstResponder()
             return false
         }
         return true
+    }
+    
+    override public func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
     }
     
     /// MARK: - deinit

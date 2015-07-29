@@ -69,7 +69,7 @@ internal class ButterflyDrawView : UIView {
     override init(frame: CGRect) {
         super.init(frame: UIScreen.mainScreen().bounds)
         lineWidth = 3.0
-        lineColor = UIColor.redColor()
+        lineColor = UIColor.blueColor()
         setup()
     }
     

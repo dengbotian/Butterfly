@@ -25,16 +25,25 @@
 //  THE SOFTWARE.
 
 import UIKit
+import AudioToolbox
 
 public let ButterflyDidShakingNotification = "com.wongzigii.Butterfly.ShakingNotification"
 
 private let instance = ButterflyManager()
 
 
+protocol ButterflyManagerDelegate: class {
+    
+    func pressedSendButton(image: UIImage?, text: String?)
+}
+
+
 ///  Main manager class of Butterfly
 
 public class ButterflyManager: NSObject, ButterflyViewControllerDelegate {
   
+    weak var delegate: ButterflyManagerDelegate?
+    
     public var imageWillUpload: UIImage? {
         return self.butterflyViewController?.imageWillUpload
     }
@@ -81,6 +90,8 @@ public class ButterflyManager: NSObject, ButterflyViewControllerDelegate {
     func ButterflyViewControllerDidPressedSendButton(drawView: ButterflyDrawView?) {
         /// Custom this method.
         print("ButterflyViewController 's delegate method [-ButterflyViewControllerDidEndReporting] invoked\n")
+        
+        delegate?.pressedSendButton(self.imageWillUpload, text: textWillUpload)
     }
     
     /// Begin handling shake event.
@@ -105,9 +116,11 @@ public class ButterflyManager: NSObject, ButterflyViewControllerDelegate {
             let rootvc: UIViewController = (presented as! UINavigationController).viewControllers[0] as! UIViewController
             if rootvc.isKindOfClass(ButterflyViewController) == false {
                 presented?.presentViewController(nav, animated: true, completion: nil)
+                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
             }
         } else if presented?.isKindOfClass(ButterflyViewController) == false {
             presented?.presentViewController(nav, animated: true, completion: nil)
+            
         }
     }
     
