@@ -120,7 +120,7 @@ public class ButterflyManager: NSObject, ButterflyViewControllerDelegate {
             }
         } else if presented?.isKindOfClass(ButterflyViewController) == false {
             presented?.presentViewController(nav, animated: true, completion: nil)
-            
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         }
     }
     

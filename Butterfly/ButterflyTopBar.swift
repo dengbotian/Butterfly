@@ -62,7 +62,7 @@ internal class ButterflyTopBar: UIView {
     private func setup() {
         backgroundColor = barViewBackgroundColor
         
-        let centerY: CGFloat = self.frame.size.height / 2 - topBarButtonHeight / 2
+        let centerY: CGFloat = self.frame.size.height / 2 - topBarButtonHeight / 2 + 7
         
         cancelButton = UIButton()
         cancelButton?.frame = CGRect(
