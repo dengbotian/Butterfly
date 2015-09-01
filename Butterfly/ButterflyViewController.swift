@@ -125,8 +125,6 @@ public class ButterflyViewController: UIViewController, ButterflyDrawViewDelegat
             }
         }
         showAlertViewController()
-        println(self.imageWillUpload)
-        println(self.textWillUpload)
     }
     
     func showAlertViewController() {

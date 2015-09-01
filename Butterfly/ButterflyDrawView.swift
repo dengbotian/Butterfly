@@ -182,5 +182,16 @@ internal class ButterflyDrawView : UIView {
     
     deinit {
         self.delegate = nil
+        
+        lineWidth = nil
+        lineColor = nil
+        isTouchBegan = nil
+        if backgroundImageView != nil {
+            backgroundImageView?.image = nil
+            backgroundImageView = nil
+        }
+        path = nil
+        previousPoint = nil
+        oldPoint = nil
     }
 }
