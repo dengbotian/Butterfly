@@ -105,7 +105,7 @@ public class ButterflyManager: NSObject, ButterflyViewControllerDelegate {
         
         var presented = UIApplication.sharedApplication().keyWindow?.rootViewController
         
-        while let vc = presented?.presentedViewController {
+        while let _ = presented?.presentedViewController {
             presented = presented?.presentedViewController
         }
         
@@ -113,7 +113,7 @@ public class ButterflyManager: NSObject, ButterflyViewControllerDelegate {
         nav.modalTransitionStyle = .CrossDissolve
         
         if presented?.isKindOfClass(UINavigationController) == true {
-            let rootvc: UIViewController = (presented as! UINavigationController).viewControllers[0] as! UIViewController
+            let rootvc: UIViewController = (presented as! UINavigationController).viewControllers[0] 
             if rootvc.isKindOfClass(ButterflyViewController) == false {
                 presented?.presentViewController(nav, animated: true, completion: nil)
                 AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
@@ -137,7 +137,7 @@ public class ButterflyManager: NSObject, ButterflyViewControllerDelegate {
         let layer = UIApplication.sharedApplication().keyWindow?.layer
         let scale = UIScreen.mainScreen().scale
         UIGraphicsBeginImageContextWithOptions(imageSize, false, scale);
-        layer?.renderInContext(UIGraphicsGetCurrentContext())
+        layer?.renderInContext(UIGraphicsGetCurrentContext()!)
         let screenshot = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
@@ -156,7 +156,7 @@ public class ButterflyManager: NSObject, ButterflyViewControllerDelegate {
                 imageOrientation = UIImageOrientation.Up
                 break
         }
-        let image = UIImage(CGImage: screenshot.CGImage, scale: screenshot.scale, orientation: imageOrientation)
+        let image = UIImage(CGImage: screenshot.CGImage!, scale: screenshot.scale, orientation: imageOrientation)
         return image
     }
     

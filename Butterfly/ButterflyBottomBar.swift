@@ -56,11 +56,11 @@ class ButterflyBottomBar: UIView {
         let centerY: CGFloat = self.frame.size.height / 2 - bottomBarButtonSize / 2
         
         let bundlePath = NSString(format: "%@/Frameworks/Butterfly.framework/Butterfly.bundle", NSBundle.mainBundle().bundlePath)
-        let colorChangeButtonImgPath = NSString(format: "%@/analytics.png", bundlePath)
+        _ = NSString(format: "%@/analytics.png", bundlePath)
         let colorChangeButtonImg = UIImage(named: "analytics.png")
-        let descriptionButtonImgPath = NSString(format: "%@/email-outline.png", bundlePath)
+        _ = NSString(format: "%@/email-outline.png", bundlePath)
         let descriptionButtonImg = UIImage(named: "email-outline.png")
-        let clearButtonImgPath = NSString(format: "%@/trash.png", bundlePath)
+        _ = NSString(format: "%@/trash.png", bundlePath)
         let clearButtonImg = UIImage(named: "trash.png")
         
         colorChangedButton = UIButton()

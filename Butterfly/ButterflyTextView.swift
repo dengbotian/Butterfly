@@ -58,7 +58,7 @@ internal class ButterflyTextView : UITextView, UITextViewDelegate {
                 delay: 0,
                 usingSpringWithDamping: 0.5,
                 initialSpringVelocity: 0.7,
-                options: UIViewAnimationOptions.allZeros,
+                options: UIViewAnimationOptions(),
                 animations: { () -> Void in
                     self.frame = CGRect(
                         x: self.frame.origin.x,
@@ -80,7 +80,7 @@ internal class ButterflyTextView : UITextView, UITextViewDelegate {
                 delay: 0,
                 usingSpringWithDamping: 0.5,
                 initialSpringVelocity: 0.7,
-                options: UIViewAnimationOptions.allZeros,
+                options: UIViewAnimationOptions(),
                 animations: { () -> Void in
                     self.frame = CGRect(
                         x: self.frame.origin.x,

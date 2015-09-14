@@ -81,7 +81,7 @@ public class ButterflyViewController: UIViewController, ButterflyDrawViewDelegat
         
         imageView = UIImageView(frame: UIScreen.mainScreen().bounds)
         imageView?.image = self.image
-        imageView?.autoresizingMask = UIViewAutoresizing.FlexibleTopMargin | UIViewAutoresizing.FlexibleBottomMargin
+        imageView?.autoresizingMask = [UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleBottomMargin]
         imageView?.contentMode = UIViewContentMode.Center
         self.view.addSubview(imageView!)
         
@@ -224,7 +224,7 @@ public class ButterflyViewController: UIViewController, ButterflyDrawViewDelegat
         return true
     }
     
-    override public func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override public func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
     
